@@ -14,7 +14,7 @@
 <aside class="sidebar">
   <div class="brand"><div class="sigil">✦</div><div><strong>Spelljammer Console</strong><br><small>Viaggio, eventi e crafting</small></div></div>
   <nav id="nav"></nav>
-  <div class="footer">Dati importati dai due Excel. Salvataggio condiviso online con Firebase.<br><strong>Versione 13 · Allocazione da Equipaggio</strong><br><span id="syncStatus" class="pill warn" style="margin-top:8px">Connessione…</span></div>
+  <div class="footer">Dati importati dai due Excel. Salvataggio condiviso online con Firebase.<br><strong>Versione 14 · Syntax fix</strong><br><span id="syncStatus" class="pill warn" style="margin-top:8px">Connessione…</span></div>
 </aside>
 <main class="main">
   <section id="dashboard" class="section active"></section>
@@ -129,7 +129,7 @@ window.saveTravel=(notify=true)=>{
   }
   if(notify)alert('Viaggio salvato online.');
 }
-window.resetTravel=()=>{ if(confirm('Ripristinare tracker e rigenerare l'allocazione PG dall'equipaggio?')){state.turns=null; state.allocations=null; store.remove('turns'); store.remove('allocations'); initTravelState(); pushRemoteNow(); renderTravel()}}
+window.resetTravel=()=>{ if(confirm("Ripristinare tracker e rigenerare l'allocazione PG dall'equipaggio?")){state.turns=null; state.allocations=null; store.remove('turns'); store.remove('allocations'); initTravelState(); pushRemoteNow(); renderTravel()}}
 function eventRows(){return S.eventi.filter(e=>['Complicazione grave','Complicazione minore','Nessun evento importante','Opportunità','Scoperta rara'].includes(e['Tipo Evento']))}
 function selectedEventTurn(){let v=Number($('#eventTurn')?.value||1); return Math.min(12,Math.max(1,v))}
 function eventModForTurn(turn){initTravelState(); let row=state.turns.find(r=>Number(r.Turno)===Number(turn))||state.turns[turn-1]||state.turns[0]; return calcTurn(row)['Mod Evento']||0}
