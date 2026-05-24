@@ -44,7 +44,7 @@
 <aside class="sidebar">
   <div class="brand"><div class="sigil">✦</div><div><strong>Spelljammer Console</strong><br><small>Viaggio, eventi e crafting</small></div></div>
   <nav id="nav"></nav>
-  <div class="footer">Dati importati dai due Excel. Salvataggio condiviso online con Firebase.<br><strong>Versione 31 · Flotta 2.5D hotfix</strong><br><span id="syncStatus" class="pill warn" style="margin-top:8px">Connessione…</span></div>
+  <div class="footer">Dati importati dai due Excel. Salvataggio condiviso online con Firebase.<br><strong>Versione 32 · Syntax hotfix</strong><br><span id="syncStatus" class="pill warn" style="margin-top:8px">Connessione…</span></div>
 </aside>
 <main class="main">
   <section id="dashboard" class="section active"></section>
@@ -113,7 +113,7 @@ function table(rows, cols=null){ if(!rows?.length)return '<p class="muted">Nessu
 function gridTable(rows){return `<div class="tablewrap"><table><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${fmt(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
 function allItems(){return [...C.materials.map(x=>({...x,_type:'Materiale'})),...C.organics.map(x=>({...x,_type:'Organico'})),...C.energy.map(x=>({...x,_type:'Energia'})),...C.food.map(x=>({...x,_type:'Cibo'}))]}
 function recipeReqs(r){const pairs=[['Material','Qty'],['Material 2','Qty 2'],['Organic','Qty 3'],['Organic 2','Qty 4'],['Energy','Qty 5'],['Energy 2','Qty 6']]; return pairs.map(([n,q])=>({name:r[n],qty:Number(r[q]||0)})).filter(x=>x.name&&x.name!='-'&&x.qty>0)}
-function setTab(id){state.tab=id; $$('.section').forEach(x=>x.classList.toggle('active',x.id===id)); $$('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.tab===id)); try{renderSection(id)}catch(e){console.error(e); const el=document.getElementById(id); if(el)el.innerHTML='<div class="notice">Errore nel caricamento della sezione. Apri la console e inviami l'errore.</div>';}}
+function setTab(id){state.tab=id; $$('.section').forEach(x=>x.classList.toggle('active',x.id===id)); $$('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.tab===id)); try{renderSection(id)}catch(e){console.error(e); const el=document.getElementById(id); if(el)el.innerHTML="<div class=\"notice\">Errore nel caricamento della sezione. Apri la console e inviami l\'errore.</div>";}}
 function initNav(){ $('#nav').innerHTML=tabs.map(([id,l])=>`<button class="navbtn ${id==='dashboard'?'active':''}" data-tab="${id}">${l}</button>`).join(''); $$('.navbtn').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));}
 function statCards(){let items=allItems(); return `<div class="grid cols3"><div class="card"><div class="muted">Materiali / risorse</div><div class="kpi">${items.length}</div></div><div class="card"><div class="muted">Ricette</div><div class="kpi">${C.recipes.length}</div></div><div class="card"><div class="muted">Attività viaggio</div><div class="kpi">${S.attivita.length}</div></div></div>`}
 function renderDashboard(){ $('#dashboard').innerHTML=`<div class="hero"><h1>Console della Nave</h1><p class="muted">Una web app sincronizzata online per gestire il sistema di viaggio Spelljammer, eventi, crafting, ricette e inventario della campagna.</p><div class="toolbar"><button class="btn primary" onclick="setTab('events')">Tira evento di rotta</button><button class="btn" onclick="setTab('recipes')">Consulta ricette</button><button class="btn" onclick="setTab('travel')">Gestisci turni</button><button class="btn" onclick="setTab('crew')">Equipaggio</button><button class="btn" onclick="setTab('fleet')">Flotta</button><button class="btn" onclick="exportSave()">Esporta backup</button><button class="btn" onclick="document.getElementById('importSaveInput').click()">Importa backup</button><input id="importSaveInput" type="file" accept="application/json" style="display:none" onchange="importSave(this.files[0]); this.value=''"></div></div>${statCards()}<div class="grid cols2" style="margin-top:16px"><div class="card"><h2>Ultimi eventi</h2><div class="log">${state.log.slice(0,6).map(logHtml).join('')||'<p class="muted">Nessun evento registrato.</p>'}</div></div><div class="card"><h2>Attività di viaggio</h2><div class="cards">${S.attivita.slice(0,4).map(a=>`<div class="item-card"><h3>${esc(a.Attività)}</h3><p class="muted mini">${esc(a['Cosa Produce'])}</p><span class="pill">${esc(a.Costo)}</span></div>`).join('')}</div></div></div>`}
@@ -414,7 +414,7 @@ function initRealtimeSync(){
     },err=>{console.error(err);setSyncStatus('Permessi Firebase','bad')});
   }catch(e){console.error(e);setSyncStatus('Errore Firebase','bad')}
 }
-try{initNav(); renderDashboard(); initRealtimeSync();}catch(e){console.error(e); document.body.insertAdjacentHTML('beforeend','<div class="notice" style="position:fixed;left:20px;right:20px;bottom:20px;z-index:9999">Errore di avvio della web app. Apri la console e inviami l'errore.</div>');}
+try{initNav(); renderDashboard(); initRealtimeSync();}catch(e){console.error(e); document.body.insertAdjacentHTML('beforeend',"<div class=\"notice\" style=\"position:fixed;left:20px;right:20px;bottom:20px;z-index:9999\">Errore di avvio della web app. Apri la console e inviami l'errore.</div>");}
 </script>
 </body>
 </html>
