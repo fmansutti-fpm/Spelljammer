@@ -44,7 +44,7 @@
 <aside class="sidebar">
   <div class="brand"><div class="sigil">✦</div><div><strong>Spelljammer Console</strong><br><small>Viaggio, eventi e crafting</small></div></div>
   <nav id="nav"></nav>
-  <div class="footer">Dati importati dai due Excel. Salvataggio condiviso online con Firebase.<br><strong>Versione 32 · Syntax hotfix</strong><br><span id="syncStatus" class="pill warn" style="margin-top:8px">Connessione…</span></div>
+  <div class="footer">Dati importati dai due Excel. Salvataggio condiviso online con Firebase.<br><strong>Versione 33 · Reference fix</strong><br><span id="syncStatus" class="pill warn" style="margin-top:8px">Connessione…</span></div>
 </aside>
 <main class="main">
   <section id="dashboard" class="section active"></section>
@@ -384,6 +384,14 @@ window.closeShipViewer=()=>{state.viewerShipId=null; renderShipViewer()}
 window.setShipViewMode=(id,mode)=>{let s=shipById(id); if(!s)return; s.viewMode=mode; saveFleet(); renderShipViewer()}
 window.resetShipViewer=(id)=>{let s=shipById(id); if(!s)return; (s.sections||[]).forEach((sec,i)=>{sec.view=defaultSectionView(i)}); saveFleet(); renderShipViewer()}
 window.updateShipSectionView=(id,secId,key,value,preview=false)=>{let s=shipById(id); if(!s)return; let sec=(s.sections||[]).find(x=>x.id===secId); if(!sec)return; sec.view=normalizeSectionView(sec.view,(s.sections||[]).indexOf(sec)); if(key==='visible')sec.view.visible=!!value; else sec.view[key]=+value; if(!preview)saveFleet(); renderShipViewer()}
+
+function renderReference(){
+  const S = (APP_DATA && APP_DATA.spelljammer) || {};
+  const C = (APP_DATA && APP_DATA.crafting) || {};
+  const safeGrid = (data)=>{ try{return gridTable(data||[])}catch(e){return '<p class="muted">Nessun dato disponibile.</p>'} };
+  const safeTable = (data)=>{ try{return table(data||[])}catch(e){return '<p class="muted">Nessun dato disponibile.</p>'} };
+  $('#reference').innerHTML=`<div class="hero"><h1>Riferimenti Excel</h1><p class="muted">Tabelle importate dal sistema originale.</p><span class="versiontag">v33 reference fix</span></div><div class="grid"><div class="card"><h2>Panoramica</h2>${safeGrid(S.panoramica)}</div><div class="card"><h2>Soglie</h2>${safeGrid(S.soglie_grid)}</div><div class="card"><h2>Guida equipaggiamento</h2>${safeTable(C.equipment)}</div><div class="card"><h2>Monete</h2>${safeTable(C.coins)}</div></div>`;
+}
 
 function renderSection(id){({dashboard:renderDashboard,travel:renderTravel,events:renderEvents,crafting:renderCrafting,recipes:renderRecipes,inventory:renderInventory,crew:renderCrew,fleet:renderFleet,reference:renderReference}[id]||renderDashboard)()}
 function refreshCurrent(){try{renderSection(state.tab||'dashboard'); renderShipViewer()}catch(e){console.error(e)}}
