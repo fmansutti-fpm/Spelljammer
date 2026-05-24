@@ -15,6 +15,26 @@
 .points-inline{display:inline-flex;align-items:baseline;justify-content:center;gap:4px;min-width:70px;white-space:nowrap;line-height:1;}
 .points-inline strong{font-size:1.05rem;font-weight:900;color:#fff;line-height:1;}
 .allocation-table .editable{width:64px;}
+
+
+/* v25 responsive layout controls */
+.main{width:100%;min-width:0}.section,.card,.hero{min-width:0}.tablewrap{-webkit-overflow-scrolling:touch}.tablewrap:after{content:"Scorri lateralmente per vedere tutta la tabella";display:none;color:var(--muted);font-size:.78rem;padding:8px 10px;border-top:1px solid var(--line);background:#0f151e}.input,.select,textarea,.btn{max-width:100%}img{max-width:100%;height:auto}
+@media(max-width:1200px){
+  .app{grid-template-columns:230px 1fr}.sidebar{padding:18px}.main{padding:22px 24px 50px}.hero{padding:22px;border-radius:22px}.card{padding:16px}.cards{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}.crew-grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}.wallet-grid{grid-template-columns:repeat(2,minmax(140px,1fr))}.allocation-table{min-width:1060px}.confirm-cell{min-width:160px}.editable{width:64px}
+}
+@media(max-width:920px){
+  body{font-size:14px;background:#0e1116}.app{display:block}.sidebar{position:sticky;top:0;z-index:30;height:auto;max-height:none;border-right:0;border-bottom:1px solid var(--line);padding:12px 14px;background:rgba(9,12,17,.96)}.brand{margin-bottom:10px}.brand .sigil{width:36px;height:36px;border-radius:12px}.brand h2{font-size:1.05rem;margin:0}.brand small{display:none}nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}.navbtn{width:auto;white-space:nowrap;flex:0 0 auto;padding:9px 11px}.footer{margin-top:8px;font-size:.74rem}.main{padding:16px 14px 42px}.hero{padding:18px;margin-bottom:16px;border-radius:18px}.hero:after{display:none}.grid.cols2,.grid.cols3,.recipeBox,.crew-detail-grid,.crew-form{grid-template-columns:1fr}.toolbar{gap:8px}.toolbar .input,.toolbar .select,.toolbar .btn{flex:1 1 180px}.kv{grid-template-columns:110px 1fr}.crew-ability-grid{grid-template-columns:repeat(3,minmax(70px,1fr))}.project-create{grid-template-columns:1fr}.tablewrap:after{display:block}th,td{padding:9px 10px}.allocation-table{min-width:980px}.points-cell{min-width:92px}.points-big{font-size:1rem}.confirm-cell{min-width:145px}.editable{width:58px;padding:6px}.calc-cell{min-width:42px;padding:6px 7px}
+}
+@media(max-width:700px){
+  h1{font-size:1.65rem}h2{font-size:1.15rem}.main{padding:12px 10px 34px}.hero,.card{padding:14px;border-radius:16px}.cards,.crew-grid{grid-template-columns:1fr}.item-card,.crew-card{border-radius:16px}.wallet-grid,.reserve-grid{grid-template-columns:1fr}.crew-stats{grid-template-columns:repeat(3,1fr)}.crew-ability-grid{grid-template-columns:repeat(2,minmax(90px,1fr))}.actionbar{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actionbar .btn{width:100%}.btn{padding:9px 11px}.input,.select,textarea{padding:9px 10px}.kpi{font-size:1.55rem}.dice{font-size:2rem}.tablewrap{border-radius:13px}table{min-width:680px}.allocation-table{min-width:920px}.alloc-player{min-width:120px}.confirm-cell{min-width:135px}.versiontag{display:inline-flex;margin:.35rem 0 0 0}
+}
+@media(max-width:520px){
+  body{font-size:13.5px}.sidebar{padding:10px}.navbtn{padding:8px 10px}.main{padding:10px 8px 30px}.hero,.card{padding:12px}.toolbar{display:grid;grid-template-columns:1fr}.toolbar .input,.toolbar .select,.toolbar .btn{width:100%;flex:unset}.kv{grid-template-columns:1fr;gap:2px 0}.kv div:nth-child(odd){margin-top:8px}.crew-ability-grid{grid-template-columns:1fr 1fr}.crew-stat{padding:7px}.portrait-large{max-width:260px;margin:0 auto}.project-row{padding:9px}.actionbar{grid-template-columns:1fr}.tablewrap{margin-left:-4px;margin-right:-4px;border-left:0;border-right:0;border-radius:0}table{min-width:620px}.allocation-table{min-width:880px}th,td{padding:8px}.editable{width:52px}.coin{width:1.55em;height:1.55em;min-width:1.55em}.pill{font-size:.76rem;padding:3px 7px}
+}
+@media(pointer:coarse){
+  .btn,.navbtn,.input,.select,textarea{min-height:42px}.editable{min-height:38px}.crew-card:hover,.btn:hover{transform:none}
+}
+
 </style>
 </head>
 <body>
@@ -22,7 +42,7 @@
 <aside class="sidebar">
   <div class="brand"><div class="sigil">✦</div><div><strong>Spelljammer Console</strong><br><small>Viaggio, eventi e crafting</small></div></div>
   <nav id="nav"></nav>
-  <div class="footer">Dati importati dai due Excel. Salvataggio condiviso online con Firebase.<br><strong>Versione 24 · Scorte PG ricalcolate</strong><br><span id="syncStatus" class="pill warn" style="margin-top:8px">Connessione…</span></div>
+  <div class="footer">Dati importati dai due Excel. Salvataggio condiviso online con Firebase.<br><strong>Versione 25 · Responsive layout</strong><br><span id="syncStatus" class="pill warn" style="margin-top:8px">Connessione…</span></div>
 </aside>
 <main class="main">
   <section id="dashboard" class="section active"></section>
